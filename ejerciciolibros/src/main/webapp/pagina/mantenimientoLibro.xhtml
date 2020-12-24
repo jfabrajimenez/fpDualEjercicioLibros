@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+    	<title>Mantenimiento de libros</title>
+    </h:head>
+    
+    <h:body>
+    	<h:form>
+    		<h:outputText value="ISBN del libro a modificar"/>
+		    <p:inputText id="isbnViejo" value="#{mantenimientoLibroVista.isbnViejo}" />
+		    <p:spacer height="10px" width="100%"/>
+		    
+    		<h:outputText value="ISBN"/>
+		    <p:inputText id="isbn" value="#{mantenimientoLibroVista.isbn}" />
+		    <p:spacer height="10px" width="100%"/>
+		    
+		    <h:outputText value="Titulo"/>
+		    <p:inputText id="titulo" value="#{mantenimientoLibroVista.titulo}" />
+		    <p:spacer height="10px" width="100%"/>
+		    
+		    <h:outputText value="Precio"/>
+		    <p:inputNumber id="precio" value="#{mantenimientoLibroVista.precio}" decimalSeparator="," />  
+		    <p:spacer height="10px" width="100%"/>
+		    
+		    <p:commandButton id="submitButton" action="#{mantenimientoLibroVista.guardar}" value="Guardar" oncomplete="inicializarVista()" />
+		    <p:commandButton id="botonBorrar" action="#{mantenimientoLibroVista.borrar}" value="Borrar" oncomplete="inicializarVista()" />
+		    
+		    <p:remoteCommand action="#{mantenimientoLibroVista.inicializar}" name="inicializarVista" update="tablaLibros" />
+		    
+		    <p:dataTable id="tablaLibros"
+		    	var="libro"
+		    	value="#{mantenimientoLibroVista.libros}">
+		    	
+		    	<p:column headerText="ISBN">
+			        <h:outputText value="#{libro.isbn}" />
+			    </p:column>
+			    
+			    <p:column headerText="Titlo">
+			        <h:outputText value="#{libro.titulo}" />
+			    </p:column>
+			    
+			    <p:column headerText="Precio">
+			        <h:outputText value="#{libro.precio}" />
+			    </p:column>
+		    </p:dataTable>
+    	</h:form>
+    </h:body>
+    
+</html>
